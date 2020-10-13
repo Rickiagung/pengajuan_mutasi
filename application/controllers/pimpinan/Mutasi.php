@@ -9,9 +9,9 @@ class Mutasi extends CI_Controller {
 
     public function index()
     {
-        $query = "SELECT `mutasi`.`id`, `mutasi`.`guru_id`, `guru`.`nip`,                
-                    `guru`.`nama`, `guru`.`alamat` FROM `mutasi`, `guru`
-                    WHERE `mutasi`.`guru_id` = `guru`.`id`";
+        $query = "SELECT `mutasi`.`id`, `mutasi`.`pegawai_id`, `pegawai`.`nip`,                
+                    `pegawai`.`nama`, `pegawai`.`alamat` FROM `mutasi`, `pegawai`
+                    WHERE `mutasi`.`pegawai_id` = `pegawai`.`id`";
         $data['mutasi'] = $this->db->query($query)->result();
 
         $data['_view']= "pimpinan/mutasi/index";
@@ -20,9 +20,9 @@ class Mutasi extends CI_Controller {
 
     public function cekdata($id)
     {
-        $query = "SELECT `mutasi`.*, `guru`.*
-                    FROM `mutasi`, `guru`
-                    WHERE `mutasi`.`guru_id` = `guru`.`id` AND `mutasi`.`id` = $id";
+        $query = "SELECT `mutasi`.*, `pegawai`.*
+                    FROM `mutasi`, `pegawai`
+                    WHERE `mutasi`.`pegawai_id` = `pegawai`.`id` AND `mutasi`.`id` = $id";
 
         $data['mutasi'] = $this->db->query($query)->row();
 
@@ -32,7 +32,7 @@ class Mutasi extends CI_Controller {
 
     public function cekdatasave($id)
     {
-        $cek = $this->db->get_where('file',['guru_id' => $id, 'status' => 1, 'jenis' => 2])->num_rows();
+        $cek = $this->db->get_where('file',['pegawai_id' => $id, 'status' => 1, 'jenis' => 2])->num_rows();
         
         if($cek >= 11 ){
             
@@ -40,7 +40,7 @@ class Mutasi extends CI_Controller {
                 'pengembalian_inventaris' => 1,
                 'status' => 1,
             ];
-            $this->db->where('guru_id', $id);
+            $this->db->where('pegawai_id', $id);
             $this->db->update('mutasi', $data);
         }
         
@@ -57,7 +57,7 @@ class Mutasi extends CI_Controller {
                 'pengembalian_inventaris' => 0,
                 'status' => 2,
             ];
-            $this->db->where('guru_id', $file->guru_id);
+            $this->db->where('pegawai_id', $file->pegawai_id);
             $this->db->update('mutasi', $data);
         }
 
@@ -70,7 +70,7 @@ class Mutasi extends CI_Controller {
         $this->session->set_flashdata('flash',"Divalidasi");
 
         // cek apakah sudah tervalidasi benar semua ?
-        $cek = $this->db->get_where('file',['guru_id' => $file->guru_id, 'jenis' => 2, 'status' => 1])->num_rows();
+        $cek = $this->db->get_where('file',['pegawai_id' => $file->pegawai_id, 'jenis' => 2, 'status' => 1])->num_rows();
         
         if($cek >= 6 ){
             
@@ -78,7 +78,7 @@ class Mutasi extends CI_Controller {
                 'pengembalian_inventaris' => 1,
                 'status' => 1,
             ];
-            $this->db->where('guru_id', $file->guru_id);
+            $this->db->where('pegawai_id', $file->pegawai_id);
             $this->db->update('mutasi', $data);
         }
 
@@ -89,12 +89,12 @@ class Mutasi extends CI_Controller {
     {
         $mutasi = $this->db->get_where('mutasi',['id' => $id])->row();
 
-        $this->db->delete('keluarga', ['guru_id' => $mutasi->guru_id]);
-        $this->db->delete('file', ['guru_id' => $mutasi->guru_id]);
+        $this->db->delete('keluarga', ['pegawai_id' => $mutasi->pegawai_id]);
+        $this->db->delete('file', ['pegawai_id' => $mutasi->pegawai_id]);
 
-        $guru = $this->db->get_where('guru',['id' => $mutasi->guru_id])->row();
+        $pegawai = $this->db->get_where('pegawai',['id' => $mutasi->pegawai_id])->row();
 
-        array_map('unlink', glob(FCPATH."./upload_berkas/".$guru->nama."/*"));
+        array_map('unlink', glob(FCPATH."./upload_berkas/".$pegawai->nama."/*"));
 
         $this->db->delete('mutasi', ['id' => $id]);
 

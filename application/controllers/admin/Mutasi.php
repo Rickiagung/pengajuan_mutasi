@@ -92,9 +92,9 @@ class Mutasi extends CI_Controller {
         $this->db->delete('keluarga', ['pegawai_id' => $mutasi->pegawai_id]);
         $this->db->delete('file', ['pegawai_id' => $mutasi->pegawai_id]);
 
-        $guru = $this->db->get_where('guru',['id' => $mutasi->pegawai_id])->row();
+        $pegawai = $this->db->get_where('pegawai',['id' => $mutasi->pegawai_id])->row();
 
-        array_map('unlink', glob(FCPATH."./upload_berkas/".$guru->nama."/*"));
+        array_map('unlink', glob(FCPATH."./upload_berkas/".$pegawai->nama."/*"));
 
         $this->db->delete('mutasi', ['id' => $id]);
 

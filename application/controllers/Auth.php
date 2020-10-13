@@ -8,7 +8,7 @@ class Auth extends CI_Controller {
         if($this->session->userdata('role_id') == 1){
             redirect('admin/home');
         } else if($this->session->userdata('role_id') == 2){
-            redirect('guru/home');
+            redirect('pegawai/home');
         } 
         
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
@@ -46,7 +46,7 @@ class Auth extends CI_Controller {
                 if($user->role_id == 1){
                     redirect('admin/home');
                 } else if($user->role_id == 2){
-                    redirect('guru/home');
+                    redirect('pegawai/home');
                 } else if($user->role_id == 3){
                     redirect('pimpinan/home');
                 }
@@ -71,28 +71,17 @@ class Auth extends CI_Controller {
     public function register()
     {
         $this->load->model('Jabatan_model');
-        $this->load->model('Guru_model');
-        $data['status'] = ['PNS','HONORER'];
+        $this->load->model('Pegawai_model');
+
         $data['jabatan'] = $this->Jabatan_model->getAll();
-        $data['agama'] = ['Islam','Kristen','Katolik','Hindu','Budha','Konghucu'];
+
         
-        $this->form_validation->set_rules('nip_lama', 'NIP Lama', 'required|numeric|trim|min_length[12]|max_length[12]');
-        $this->form_validation->set_rules('nip', 'NIP', 'required|numeric|trim|min_length[12]|max_length[12]|is_unique[guru.nip]',[
-            'is_unique' => 'NIP sudah terdaftar',
-        ]);
+      
+     
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('tmp_lahir', 'Tempat Lahir', 'required|trim');
-        $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required|trim');
-        $this->form_validation->set_rules('jns_klmn', 'Jenis Kelamin', 'required|trim');
-        $this->form_validation->set_rules('status', 'Status', 'required|trim');
+       
         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required|trim');
-        $this->form_validation->set_rules('agama', 'Agama', 'required|trim');
-        $this->form_validation->set_rules('telepon', 'Telepon', 'required|trim');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required|trim');
-        $this->form_validation->set_rules('unit_kerja', 'Unit Kerja', 'required|trim');
-        $this->form_validation->set_rules('th_lulus', 'Tahun Lulus', 'required|trim');
-        $this->form_validation->set_rules('pendidikan_terakhir', 'Pendidikan Terakhir', 'required|trim');
-        $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required|trim');
+        
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[4]|matches[password2]',[
             'matches' => 'Password tidak sama',
             'min_length' => 'Password harus lebih dari 4 karakter',
@@ -105,7 +94,7 @@ class Auth extends CI_Controller {
         }
         else
         {
-            $this->Guru_model->insert();
+            $this->Pegawai_model->insert_user();
 
             $this->session->set_flashdata('pesan','<div class="alert alert-success" role="alert">Registrasi Berhasil!</div>');
             

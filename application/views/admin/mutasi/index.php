@@ -32,7 +32,7 @@
                                                         <td><?= $g->alamat ?></td>
                                                         <td>
                                                             <?php 
-                                                            $mutasi = $this->db->get_where('mutasi',['guru_id' => $g->guru_id])->row();
+                                                            $mutasi = $this->db->get_where('mutasi',['pegawai_id' => $g->pegawai_id])->row();
 
                                                             if($mutasi->status == 1){
                                                                 echo 

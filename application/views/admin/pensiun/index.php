@@ -35,7 +35,7 @@
                                                         <td>
                                                             <?php 
 
-                                                            $pengajuan = $this->db->get_where('pengajuan',['guru_id' => $g->guru_id])->row();
+                                                            $pengajuan = $this->db->get_where('pengajuan',['_id' => $g->_id])->row();
 
                                                             
 

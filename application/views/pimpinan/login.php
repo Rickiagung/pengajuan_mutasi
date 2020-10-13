@@ -8,7 +8,7 @@
             <div class="col-lg-4 mx-auto">
               <div class="auth-form-light p-5">
                 <h4 class="text-center">LOG IN</h4>
-                <h6 class="font-weight-light text-center">Aplikasi Pengajuan  mutasi guru</h6>
+                <h6 class="font-weight-light text-center">Aplikasi Pengajuan  mutasi pegawai</h6>
                 
                 <?php 
                   // pesan error/sukses

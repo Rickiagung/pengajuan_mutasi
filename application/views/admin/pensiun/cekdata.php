@@ -70,7 +70,7 @@
                                             Data Keluarga
                                         </div>
                                         <div class="card-body">
-                                            <?php $guru = $this->db->get_where('keluarga',['guru_id' => $pengajuan->guru_id])->result(); ?>
+                                            <?php $pegawai = $this->db->get_where('keluarga',['pegawai_id' => $pengajuan->pegawai_id])->result(); ?>
                                             
                                             <table class="table table-bordered">
                                                 <tr>
@@ -79,7 +79,7 @@
                                                     <th>Lahir</th>
                                                     <th>Status</th>
                                                 </tr>
-                                                <?php $i=1; foreach($guru as $g) : ?>
+                                                <?php $i=1; foreach($pegawai as $g) : ?>
                                                     <tr>
                                                         <td><?= $i++ ?></td>
                                                         <td><?= $g->nama ?></td>
@@ -113,7 +113,7 @@
                                             </div>
                                             <?php endif; ?>
 
-                                            <?php $file = $this->db->get_where('file',['guru_id' => $pengajuan->guru_id, 'jenis' => 1])->result();
+                                            <?php $file = $this->db->get_where('file',['pegawai_id' => $pengajuan->pegawai_id, 'jenis' => 1])->result();
                                             // var_dump($file);die;
                                             ?>
                                             
@@ -151,7 +151,7 @@
                                                 </tbody>
                                             </table>
 
-                                            <a href="<?= base_url('admin/pensiun/cekdatasave/'.$pengajuan->guru_id) ?>" class="btn btn-primary mt-4">Save</a>
+                                            <a href="<?= base_url('admin/pensiun/cekdatasave/'.$pengajuan->pegawai_id) ?>" class="btn btn-primary mt-4">Save</a>
                                         </div>
                                     </div>
                                 </div>

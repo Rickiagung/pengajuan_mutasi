@@ -5,7 +5,7 @@ class Cekdata extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Jabatan_model');
-        $this->load->model('Guru_model');
+        $this->load->model('Pegawai_model');
         cek_login();
     }
 

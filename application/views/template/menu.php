@@ -47,14 +47,15 @@
             <span class="menu-title">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!--<li class="nav-item">
           <a class="nav-link" href="<?= base_url('admin/cekdata'); ?>">
             <i class="fas fa-users menu-icon"></i>
             <span class="menu-title">Cek Data</span>
           </a>
         </li>
+        -->
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('admin/guru'); ?>">
+          <a class="nav-link" href="<?= base_url('admin/pegawai'); ?>">
             <i class="fas fa-users menu-icon"></i>
             <span class="menu-title">Data Pegawai</span>
           </a>
@@ -85,45 +86,33 @@
           </a>
         </li>
 
-        <?php } elseif($link == "guru") { ?>
+        <?php } elseif($link == "pegawai") { ?>
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('guru/home'); ?>">
+          <a class="nav-link" href="<?= base_url('pegawai/home'); ?>">
             <i class="fas fa-tachometer-alt menu-icon"></i>
             <span class="menu-title">Dashboard</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('guru/pengajuan'); ?>">
+          <a class="nav-link" href="<?= base_url('pegawai/pengajuan'); ?>">
             <i class="fas fa-list-ul menu-icon"></i>
             <span class="menu-title">Pengajuan</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('guru/riwayatpekerjaan'); ?>">
-            <i class="fas fa-list-ul menu-icon"></i>
-            <span class="menu-title">Riwayat pekerjaan</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('guru/statuspensiun'); ?>">
-            <i class="fas fa-list-ul menu-icon"></i>
-            <span class="menu-title">Status Pengajuan Pensiun</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('guru/statusmutasi'); ?>">
+          <a class="nav-link" href="<?= base_url('pegawai/Statusmutasi'); ?>">
             <i class="fas fa-list-ul menu-icon"></i>
             <span class="menu-title">Status Pengajuan Mutasi</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('guru/user'); ?>">
+          <a class="nav-link" href="<?= base_url('pegawai/user'); ?>">
             <i class="fas fa-user  menu-icon"></i>
             <span class="menu-title">Profil</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('guru/user/ubahpassword'); ?>">
+          <a class="nav-link" href="<?= base_url('pegawai/user/ubahpassword'); ?>">
             <i class="fas fa-key  menu-icon"></i>
             <span class="menu-title">Ubah Password</span>
           </a>
@@ -138,9 +127,9 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('pimpinan/guru'); ?>">
+        <a class="nav-link" href="<?= base_url('pimpinan/pegawai'); ?>">
           <i class="fas fa-users menu-icon"></i>
-          <span class="menu-title">Data Guru</span>
+          <span class="menu-title">Data pegawai</span>
         </a>
       </li>
       <li class="nav-item">

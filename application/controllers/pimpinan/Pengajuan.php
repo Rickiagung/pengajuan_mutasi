@@ -9,10 +9,10 @@ class Pengajuan extends CI_Controller {
 
     public function index()
     {
-        $query = "SELECT `pengajuan`.`id`, `guru`.`nip`,                
-                    `guru`.`nama`, `guru`.`alamat`, 
-                    `guru`.`pensiun` FROM `pengajuan`, `guru`
-                    WHERE `pengajuan`.`guru_id` = `guru`.`id` AND `pengajuan`.`status` = 0";
+        $query = "SELECT `pengajuan`.`id`, `pegawai`.`nip`,                
+                    `pegawai`.`nama`, `pegawai`.`alamat`, 
+                    `pegawai`.`pensiun` FROM `pengajuan`, `pegawai`
+                    WHERE `pengajuan`.`pegawai_id` = `pegawai`.`id` AND `pengajuan`.`status` = 0";
         $data['pengajuan'] = $this->db->query($query)->result();
 
         $data['_view']= "admin/pengajuan/index";
@@ -21,9 +21,9 @@ class Pengajuan extends CI_Controller {
 
     public function cekdata($id)
     {
-        $query = "SELECT `pengajuan`.*, `guru`.*
-                    FROM `pengajuan`, `guru`
-                    WHERE `pengajuan`.`guru_id` = `guru`.`id` AND `pengajuan`.`id` = $id";
+        $query = "SELECT `pengajuan`.*, `pegawai`.*
+                    FROM `pengajuan`, `pegawai`
+                    WHERE `pengajuan`.`pegawai_id` = `pegawai`.`id` AND `pengajuan`.`id` = $id";
 
         $data['pengajuan'] = $this->db->query($query)->row();
 
@@ -41,7 +41,7 @@ class Pengajuan extends CI_Controller {
                 'pengembalian_inventaris' => 0,
                 'status' => 2,
             ];
-            $this->db->where('guru_id', $file->guru_id);
+            $this->db->where('pegawai_id', $file->pegawai_id);
             $this->db->update('pengajuan', $data);
         }
 
@@ -54,7 +54,7 @@ class Pengajuan extends CI_Controller {
         $this->session->set_flashdata('flash',"Divalidasi");
 
         // cek apakah sudah tervalidasi benar semua ?
-        $cek = $this->db->get_where('file',['guru_id' => $file->guru_id, 'status' => 1])->num_rows();
+        $cek = $this->db->get_where('file',['pegawai_id' => $file->pegawai_id, 'status' => 1])->num_rows();
         
         if($cek >= 11 ){
             
@@ -62,7 +62,7 @@ class Pengajuan extends CI_Controller {
                 'pengembalian_inventaris' => 1,
                 'status' => 1,
             ];
-            $this->db->where('guru_id', $file->guru_id);
+            $this->db->where('pegawai_id', $file->pegawai_id);
             $this->db->update('pengajuan', $data);
         }
 
@@ -73,12 +73,12 @@ class Pengajuan extends CI_Controller {
     {
         $pengajuan = $this->db->get_where('pengajuan',['id' => $id])->row();
 
-        $this->db->delete('keluarga', ['guru_id' => $pengajuan->guru_id]);
-        $this->db->delete('file', ['guru_id' => $pengajuan->guru_id]);
+        $this->db->delete('keluarga', ['pegawai_id' => $pengajuan->pegawai_id]);
+        $this->db->delete('file', ['pegawai_id' => $pengajuan->pegawai_id]);
 
-        $guru = $this->db->get_where('guru',['id' => $pengajuan->guru_id])->row();
+        $pegawai = $this->db->get_where('pegawai',['id' => $pengajuan->pegawai_id])->row();
 
-        array_map('unlink', glob(FCPATH."./upload_berkas/".$guru->nama."/*"));
+        array_map('unlink', glob(FCPATH."./upload_berkas/".$pegawai->nama."/*"));
 
         $this->db->delete('pengajuan', ['id' => $id]);
 

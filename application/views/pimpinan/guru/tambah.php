@@ -5,13 +5,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <h1 class="h3 text-gray-800 mb-4">Tambah Data Guru</h1>
+                            <h1 class="h3 text-gray-800 mb-4">Tambah Data </h1>
                             
                             <div class="row mb-5">
                                 <div class="col-md-7 mt-3">
                                     <div class="card">
                                         <div class="card-header">
-                                            Form Data Guru
+                                            Form Data 
                                         </div>
                                         <div class="card-body">
                                             <form method="post" action="">
@@ -148,7 +148,7 @@
                                                     <?= form_error('kecamatan','<small class="text-danger">','</small>'); ?>
                                                 </div>
                                                 <button type="submit" name="simpan" class="btn btn-primary">Save</button>
-                                                <a href="<?= base_url('admin/guru') ?>" class="btn btn-secondary">Kembali</a>
+                                                <a href="<?= base_url('admin/') ?>" class="btn btn-secondary">Kembali</a>
                                             </form>
                                         </div>
                                     </div>

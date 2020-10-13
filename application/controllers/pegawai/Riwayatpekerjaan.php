@@ -1,0 +1,97 @@
+<?php
+
+class Riwayatpekerjaan extends CI_Controller {
+    public  function __construct()
+    {
+        parent::__construct();
+        cek_login();
+    }
+
+	public function index()
+	{
+        $data['riwayat'] = $this->db->get_where('riwayat_pekerjaan',['_id' => $this->session->userdata('id')])->result();
+        
+		$data['_view'] = "/riwayat/index";
+		$this->load->view('template/index', $data);
+    }
+
+    public function tambah()
+    {
+        $this->form_validation->set_rules('uraian', 'uraian', 'required|trim');
+        $this->form_validation->set_rules('tamat', 'tamat', 'required|trim');
+        $this->form_validation->set_rules('gaji_pokok', 'gaji_pokok', 'required|trim');
+        $this->form_validation->set_rules('pangkat', 'pangkat', 'required|trim');
+        $this->form_validation->set_rules('pejabat', 'pejabat', 'required|trim');
+        $this->form_validation->set_rules('nomor', 'nomor', 'required|trim');
+        $this->form_validation->set_rules('tanggal', 'tanggal', 'required|trim');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['_view'] = "/riwayat/tambah";
+		    $this->load->view('template/index', $data);
+        }
+        else
+        {
+            $data = [
+                'uraian' => $this->input->post('uraian', true),
+                'tamat' => tanggal_en($this->input->post('tamat', true)),
+                'jabatan_id' => $this->input->post('pangkat', true),
+                'gaji_pokok' => $this->input->post('gaji_pokok', true),
+                'pejabat' => $this->input->post('pejabat', true),
+                'nomor' => $this->input->post('nomor', true),
+                'tanggal' => tanggal_en($this->input->post('tanggal', true)),
+                '_id' => $this->session->userdata('id'),
+            ];
+            
+            $this->db->insert('riwayat_pekerjaan', $data);
+
+            $this->session->set_flashdata('flash',"Ditambahkan");
+            redirect('/riwayatpekerjaan');
+        }
+    }
+
+    public function edit($id)
+    {
+        $data['riwayat'] = $this->db->get_where('riwayat_pekerjaan',['id' => $id])->row();
+        
+        $this->form_validation->set_rules('uraian', 'uraian', 'required|trim');
+        $this->form_validation->set_rules('tamat', 'tamat', 'required|trim');
+        $this->form_validation->set_rules('gaji_pokok', 'gaji_pokok', 'required|trim');
+        $this->form_validation->set_rules('pangkat', 'pangkat', 'required|trim');
+        $this->form_validation->set_rules('pejabat', 'pejabat', 'required|trim');
+        $this->form_validation->set_rules('nomor', 'nomor', 'required|trim');
+        $this->form_validation->set_rules('tanggal', 'tanggal', 'required|trim');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['_view'] = "/riwayat/edit";
+		    $this->load->view('template/index', $data);
+        }
+        else
+        {
+            $data = [
+                'uraian' => $this->input->post('uraian', true),
+                'tamat' => tanggal_en($this->input->post('tamat', true)),
+                'jabatan_id' => $this->input->post('pangkat', true),
+                'gaji_pokok' => $this->input->post('gaji_pokok', true),
+                'pejabat' => $this->input->post('pejabat', true),
+                'nomor' => $this->input->post('nomor', true),
+                'tanggal' => tanggal_en($this->input->post('tanggal', true)),
+                '_id' => $this->session->userdata('id'),
+            ];
+            
+            $this->db->where('id', $id);
+            $this->db->update('riwayat_pekerjaan', $data);
+
+            $this->session->set_flashdata('flash',"Ditambahkan");
+            redirect('/riwayatpekerjaan');
+        }
+    }
+
+    public function hapus($id)
+    {
+        $this->db->delete('riwayat_pekerjaan', ['id' => $id]);
+        $this->session->set_flashdata('flash',"Dihapus");
+        redirect('/riwayatpekerjaan');
+    }
+}

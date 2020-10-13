@@ -34,16 +34,16 @@ CREATE TABLE `file` (
   `file` varchar(100) NOT NULL,
   `status` int(11) NOT NULL,
   `jenis` int(11) NOT NULL,
-  `guru_id` int(11) NOT NULL
+  `_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `guru`
+-- Struktur dari tabel ``
 --
 
-CREATE TABLE `guru` (
+CREATE TABLE `` (
   `id` int(11) NOT NULL,
   `nip_lama` varchar(45) DEFAULT NULL,
   `nip` varchar(45) DEFAULT NULL,
@@ -64,10 +64,10 @@ CREATE TABLE `guru` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `guru`
+-- Dumping data untuk tabel ``
 --
 
-INSERT INTO `guru` (`id`, `nip_lama`, `nip`, `nama`, `tmp_lahir`, `tgl_lahir`, `jns_klmn`, `status`, `agama`, `telepon`, `alamat`, `unit_kerja`, `pensiun`, `pendidikan_terakhir`, `th_lulus`, `kecamatan`, `jabatan_id`) VALUES
+INSERT INTO `` (`id`, `nip_lama`, `nip`, `nama`, `tmp_lahir`, `tgl_lahir`, `jns_klmn`, `status`, `agama`, `telepon`, `alamat`, `unit_kerja`, `pensiun`, `pendidikan_terakhir`, `th_lulus`, `kecamatan`, `jabatan_id`) VALUES
 (1, '12345', '12345', 'Icha', 'Banyuwangi', '1999-12-12', 'P', 'PNS', 'Islam', '08112345678', 'Banyuwangi', 'SDN 2 Patok 11', '2020-12-12', 'D3', '2018', 'Gambiran', 1),
 (2, '12344', '12344', 'Laila majnun', 'Banyuwangi', '1996-12-12', 'P', 'PNS', 'Islam', '0811234567', 'Banyuwangi', 'SMPN 2 Sumberayu', '2019-12-12', 'S1', '2019', 'Muncar', 1),
 (3, '12345', '12342', 'Handoyo', 'Banyuwangi', '1990-12-01', 'L', 'PNS', 'Islam', '08112345678', 'Patok 11 sumberayu', 'SMP 2 PATOK 11', '1970-01-01', 'S1', '2003', 'Muncar', 1);
@@ -90,15 +90,15 @@ CREATE TABLE `jabatan` (
 --
 
 INSERT INTO `jabatan` (`id`, `nama`, `pangkat`, `gol_ruang`) VALUES
-(1, 'Guru Pertama', 'Penata Muda', 'III/a'),
-(2, 'Guru Pertama', 'Penata Muda Tingkat 1', 'III/b'),
-(3, 'Guru Muda', 'Penata', 'III/c'),
-(4, 'Guru Muda', 'Penata Tingkat 1', 'III/d'),
-(5, 'Guru Madya', 'Pembina', 'IV/a'),
-(6, 'Guru Madya', 'Pembina Tingkat 1', 'IV/b'),
-(7, 'Guru Madya', 'Pembina Utama Muda', 'IV/c'),
-(8, 'Guru Utama', 'Pembina Utama Madya', 'IV/d'),
-(9, 'Guru Utama', 'Pembina Utama', 'IV/e');
+(1, ' Pertama', 'Penata Muda', 'III/a'),
+(2, ' Pertama', 'Penata Muda Tingkat 1', 'III/b'),
+(3, ' Muda', 'Penata', 'III/c'),
+(4, ' Muda', 'Penata Tingkat 1', 'III/d'),
+(5, ' Madya', 'Pembina', 'IV/a'),
+(6, ' Madya', 'Pembina Tingkat 1', 'IV/b'),
+(7, ' Madya', 'Pembina Utama Muda', 'IV/c'),
+(8, ' Utama', 'Pembina Utama Madya', 'IV/d'),
+(9, ' Utama', 'Pembina Utama', 'IV/e');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE `keluarga` (
   `nama` varchar(200) NOT NULL,
   `status` varchar(20) NOT NULL,
   `tgl_lahir` date NOT NULL,
-  `guru_id` int(11) NOT NULL
+  `_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -131,7 +131,7 @@ CREATE TABLE `mutasi` (
   `tempat_mutasi` varchar(100) NOT NULL,
   `status` int(11) NOT NULL,
   `pengembalian_inventaris` int(11) NOT NULL,
-  `guru_id` int(11) NOT NULL
+  `_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -154,7 +154,7 @@ CREATE TABLE `pengajuan` (
   `pengembalian_inventaris` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `keterangan` text NOT NULL,
-  `guru_id` int(11) NOT NULL
+  `_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -172,7 +172,7 @@ CREATE TABLE `riwayat_pekerjaan` (
   `pejabat` varchar(100) NOT NULL,
   `nomor` varchar(100) NOT NULL,
   `tanggal` date NOT NULL,
-  `guru_id` int(11) NOT NULL
+  `_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -193,7 +193,7 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `nama`, `link`) VALUES
 (1, 'Admin', 'admin'),
-(2, 'Guru', 'guru'),
+(2, '', ''),
 (3, 'Kepala dinas', 'pimpinan');
 
 -- --------------------------------------------------------
@@ -204,7 +204,7 @@ INSERT INTO `role` (`id`, `nama`, `link`) VALUES
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `guru_id` int(11) NOT NULL,
+  `_id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `username` varchar(126) NOT NULL,
   `password` varchar(256) NOT NULL,
@@ -218,7 +218,7 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `guru_id`, `nama`, `username`, `password`, `role_id`, `is_active`, `gambar`, `date_created`) VALUES
+INSERT INTO `user` (`id`, `_id`, `nama`, `username`, `password`, `role_id`, `is_active`, `gambar`, `date_created`) VALUES
 (4, 1, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, 1, 'avatar.jpg', 1552637403),
 (5, 2, 'laila', '12344', '$2y$10$rzBJHKOdeDy4x7HZ8D/CuueEq70GT5hZrSW5TsrmksV9S.9M4rdGG', 2, 1, 'avatar.jpg', 1555054422),
 (6, 3, 'Handoyo', '12345', '$2y$10$E6ZrzTRw71YGoWpped0pKuIWS9Y.eeV3mXjqTgQz.nWeO32om7/.6', 3, 1, 'avatar.jpg', 1555936547);
@@ -234,9 +234,9 @@ ALTER TABLE `file`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `guru`
+-- Indeks untuk tabel ``
 --
-ALTER TABLE `guru`
+ALTER TABLE ``
   ADD PRIMARY KEY (`id`);
 
 --
@@ -292,9 +292,9 @@ ALTER TABLE `file`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
 
 --
--- AUTO_INCREMENT untuk tabel `guru`
+-- AUTO_INCREMENT untuk tabel ``
 --
-ALTER TABLE `guru`
+ALTER TABLE ``
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --

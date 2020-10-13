@@ -9,10 +9,10 @@ class Pensiun extends CI_Controller {
 
     public function index()
     {
-        $query = "SELECT `pengajuan`.`id`, `pengajuan`.`guru_id`, `guru`.`nip`,                
-                    `guru`.`nama`, `guru`.`alamat`, 
-                    `guru`.`pensiun` FROM `pengajuan`, `guru`
-                    WHERE `pengajuan`.`guru_id` = `guru`.`id`";
+        $query = "SELECT `pengajuan`.`id`, `pengajuan`.`_id`, ``.`nip`,                
+                    ``.`nama`, ``.`alamat`, 
+                    ``.`pensiun` FROM `pengajuan`, ``
+                    WHERE `pengajuan`.`_id` = ``.`id`";
         $data['pengajuan'] = $this->db->query($query)->result();
 
         $data['_view']= "pimpinan/pensiun/index";
@@ -21,9 +21,9 @@ class Pensiun extends CI_Controller {
 
     public function cekdata($id)
     {
-        $query = "SELECT `pengajuan`.*, `guru`.*
-                    FROM `pengajuan`, `guru`
-                    WHERE `pengajuan`.`guru_id` = `guru`.`id` AND `pengajuan`.`id` = $id";
+        $query = "SELECT `pengajuan`.*, ``.*
+                    FROM `pengajuan`, ``
+                    WHERE `pengajuan`.`_id` = ``.`id` AND `pengajuan`.`id` = $id";
 
         $data['pengajuan'] = $this->db->query($query)->row();
 
@@ -33,7 +33,7 @@ class Pensiun extends CI_Controller {
 
     public function cekdatasave($id)
     {
-        $cek = $this->db->get_where('file',['guru_id' => $id, 'jenis' => 1, 'status' => 1])->num_rows();
+        $cek = $this->db->get_where('file',['_id' => $id, 'jenis' => 1, 'status' => 1])->num_rows();
         
         if($cek >= 11 ){
             
@@ -41,7 +41,7 @@ class Pensiun extends CI_Controller {
                 'pengembalian_inventaris' => 1,
                 'status' => 1,
             ];
-            $this->db->where('guru_id', $id);
+            $this->db->where('_id', $id);
             $this->db->update('pengajuan', $data);
         }
         
@@ -58,7 +58,7 @@ class Pensiun extends CI_Controller {
                 'pengembalian_inventaris' => 0,
                 'status' => 2,
             ];
-            $this->db->where('guru_id', $file->guru_id);
+            $this->db->where('_id', $file->_id);
             $this->db->update('pengajuan', $data);
         }
 
@@ -71,7 +71,7 @@ class Pensiun extends CI_Controller {
         $this->session->set_flashdata('flash',"Divalidasi");
 
         // cek apakah sudah tervalidasi benar semua ?
-        $cek = $this->db->get_where('file',['guru_id' => $file->guru_id, 'jenis' => 1, 'status' => 1])->num_rows();
+        $cek = $this->db->get_where('file',['_id' => $file->_id, 'jenis' => 1, 'status' => 1])->num_rows();
         
         if($cek >= 11 ){
             
@@ -79,7 +79,7 @@ class Pensiun extends CI_Controller {
                 'pengembalian_inventaris' => 1,
                 'status' => 1,
             ];
-            $this->db->where('guru_id', $file->guru_id);
+            $this->db->where('_id', $file->_id);
             $this->db->update('pengajuan', $data);
         }
 
@@ -90,12 +90,12 @@ class Pensiun extends CI_Controller {
     {
         $pengajuan = $this->db->get_where('pengajuan',['id' => $id])->row();
 
-        $this->db->delete('keluarga', ['guru_id' => $pengajuan->guru_id]);
-        $this->db->delete('file', ['guru_id' => $pengajuan->guru_id]);
+        $this->db->delete('keluarga', ['_id' => $pengajuan->_id]);
+        $this->db->delete('file', ['_id' => $pengajuan->_id]);
 
-        $guru = $this->db->get_where('guru',['id' => $pengajuan->guru_id])->row();
+        $ = $this->db->get_where('',['id' => $pengajuan->_id])->row();
 
-        array_map('unlink', glob(FCPATH."./upload_berkas/".$guru->nama."/*"));
+        array_map('unlink', glob(FCPATH."./upload_berkas/".$->nama."/*"));
 
         $this->db->delete('pengajuan', ['id' => $id]);
 
@@ -106,7 +106,7 @@ class Pensiun extends CI_Controller {
 
     public function cetak($id)
     {
-        $data['pensiun'] = $this->db->get_where('guru',['id' => $id])->row();
+        $data['pensiun'] = $this->db->get_where('',['id' => $id])->row();
 
         $this->load->library('pdf');
 

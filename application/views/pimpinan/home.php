@@ -38,8 +38,8 @@
                                         <li class="list-group-item active">SYARAT PENGAJUAN MUTASI</li>
                                         <li class="list-group-item">a. Surat pengantar dari Sekolah</li>
                                         <li class="list-group-item">b. Surat Permohonan</li>
-                                        <li class="list-group-item">c. Surat bersedia melepas/lolos dari sekolah yang akan ditinggalkan, dilampiri tabel kelebihan dan kekurangan guru</li>
-                                        <li class="list-group-item">d. Surat bersedia menerima/butuh dari sekolah yang dituju ditabel kelebihan dan kekurangan guru</li>
+                                        <li class="list-group-item">c. Surat bersedia melepas/lolos dari sekolah yang akan ditinggalkan, dilampiri tabel kelebihan dan kekurangan </li>
+                                        <li class="list-group-item">d. Surat bersedia menerima/butuh dari sekolah yang dituju ditabel kelebihan dan kekurangan </li>
                                         <li class="list-group-item">e. SK Pangkat terakhir</li>
                                         <li class="list-group-item">f. Foto sertivikat pendidik</li>
                                     </ul>
